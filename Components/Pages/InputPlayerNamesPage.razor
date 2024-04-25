@@ -1,0 +1,16 @@
+﻿@page "/inputPlayerNames/{CurrentCount:int}"
+
+
+
+@for (int i = 0; i < CurrentCount; i++)
+{
+    <label>Name:</label> <input/> <br />
+   
+  
+}
+
+@code 
+{
+    [Parameter]
+    public int CurrentCount{ get; set; }
+}
