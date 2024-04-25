@@ -1,11 +1,21 @@
 ﻿@using EnDejtTillApplication.Components.ReusableComponents;
 @page "/selectDeck"
 
-<h3>SelectDeckPage</h3>
 
-<button><a href="/selectPlayers">Deck 1</a></button>
-<button>Deck 2</button>
-<button>Deck 3</button>
+<style>
+    button
+    {
+        margin: 1%; 
+    }
+</style>
+
+<h3>Välj tema</h3>
+
+<div>
+<button><a href="/selectPlayers">Deck 1</a></button> <br />
+    <button>Deck 2</button> <br />
+    <button>Deck 3</button>
+</div>
 <GoBackButton Url=""/>
 
 @code {
