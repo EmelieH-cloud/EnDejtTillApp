@@ -1,26 +1,56 @@
 ﻿@using EnDejtTillApplication.Components.ReusableComponents;
 @page "/inputPlayerNames/{CurrentCount:int}"
 
-
+<h2>Antal spelare: @CurrentCount</h2>
 
 @for (int i = 0; i < CurrentCount; i++)
 {
-    <label>Name:</label> <input/> <br />
-  
-}
-
-<GoForwardButton Url="Intro" onclick="AddPlayer"/>
-
-@code 
-{
-    [Parameter]
-    public int CurrentCount{ get; set; }
-
-    public List <String> Names { get; set; }
-
-    private void AddPlayer()
+ 
+    @if (i == 0 && !Names.Any())   
     {
-        
+        <label>Name:</label>
+        <input @bind="InputValue" placeholder="Deltagare 1" />
     }
 
+    else if (i > 0 && Names.Any()) 
+    {
+        <label>Name:</label>
+        <input @bind="InputValue" placeholder=@($"Deltagare {i + 1}") />
+    }
+ 
+}
+
+<button @onclick="AddPlayers">+</button>
+
+@foreach(var name in Names)
+{
+    <p>@name</p>
+}
+
+@if (Names.Count == CurrentCount)
+{
+    <GoForwardButton Url="Game"/>
+}
+
+<GoBackButton Url="selectPlayers" />
+
+@code
+{
+    [Parameter]
+    public int CurrentCount { get; set; }
+
+    public string InputValue { get; set; }
+
+    public List<string> Names { get; set; } = new List<string>();
+
+    public void AddPlayers()
+    {
+        if (Names.Count<CurrentCount)
+        {
+            string newName = InputValue;
+            Names.Add(newName);
+            InputValue = "";
+        }
+      
+    }
 }
