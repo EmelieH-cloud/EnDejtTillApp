@@ -1,8 +1,6 @@
-﻿
+﻿@using EnDejtTillApplication.Components.ReusableComponents;
 @page "/selectPlayers"
 @inject NavigationManager navigationManager;
-
-
 
     <h3>SelectPlayersPage</h3>
 
@@ -15,15 +13,7 @@
 
 
 <button @onclick="Next">Nästa</button>
-<button> <a href="/selectDeck">Tillbaka</a> </button> 
-
-
-
-
-
-
-
-
+<GoBackButton Url="selectDeck"/>
 
 @code 
 {
