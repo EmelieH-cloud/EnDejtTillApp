@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EnDejtTillApplication.Models
+﻿namespace EnDejtTillApplication.Models
 {
-    internal class Player
+    public class Player
     {
+        public string Name { get; set; }
+        public List<Card> Hand { get; set; }
+        public bool HasCard { get; set; }
+        public int MaxHandSize { get; set; }
+        public bool IsTurn { get; set; }
     }
 }

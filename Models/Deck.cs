@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace EnDejtTillApplication.Models
+﻿namespace EnDejtTillApplication.Models
 {
-    internal class Deck
+    public class Deck
     {
+        public List<Card> Cards { get; set; }
+
     }
 }
