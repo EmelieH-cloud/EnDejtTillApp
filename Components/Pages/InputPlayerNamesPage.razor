@@ -6,14 +6,21 @@
 @for (int i = 0; i < CurrentCount; i++)
 {
     <label>Name:</label> <input/> <br />
-   
   
 }
 
-<GoForwardButton Url="Game"/>
+<GoForwardButton Url="Intro" onclick="AddPlayer"/>
 
 @code 
 {
     [Parameter]
     public int CurrentCount{ get; set; }
+
+    public List <String> Names { get; set; }
+
+    private void AddPlayer()
+    {
+        
+    }
+
 }
