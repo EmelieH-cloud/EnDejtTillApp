@@ -1,22 +1,19 @@
 ﻿@page "/Game"
 @using EnDejtTillApplication.Managers;
 @using EnDejtTillApplication.Models;
-<h3>Game</h3>
+
+<h3>Deltagare</h3>
 
 @foreach (var player in PlayerManager.Players)
 {
-    <label>@player.Name</label>
+    <label>@player.Name</label><br />
 }
 
 
 @code {
 
-    private List <Player> Players { get; set; }
+  
 
-    protected override async Task OnInitializedAsync()
-    {
-
-    }
 
 
 }
