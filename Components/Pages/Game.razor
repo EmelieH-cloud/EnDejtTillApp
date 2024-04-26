@@ -1,7 +1,12 @@
 ﻿@page "/Game"
+@using EnDejtTillApplication.Managers;
 @using EnDejtTillApplication.Models;
 <h3>Game</h3>
 
+@foreach (var player in PlayerManager.Players)
+{
+    <label>@player.Name</label>
+}
 
 
 @code {

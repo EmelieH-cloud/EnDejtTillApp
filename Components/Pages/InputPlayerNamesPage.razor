@@ -1,35 +1,30 @@
 ﻿@using EnDejtTillApplication.Components.ReusableComponents;
+@using EnDejtTillApplication.Managers;
 @page "/inputPlayerNames/{CurrentCount:int}"
+@inject NavigationManager navigationManager;
+
 
 <h2>Antal spelare: @CurrentCount</h2>
 
-@for (int i = 0; i < CurrentCount; i++)
+@for (int i = 1; i <= CurrentCount; i++)
 {
- 
-    @if (i == 0 && !Names.Any())   
+    @if (i == CurrentCount)
     {
         <label>Name:</label>
-        <input @bind="InputValue" placeholder="Deltagare 1" />
+        <input @bind="InputValue" placeholder="Deltagare" />
     }
-
-    else if (i > 0 && Names.Any()) 
-    {
-        <label>Name:</label>
-        <input @bind="InputValue" placeholder=@($"Deltagare {i + 1}") />
-    }
- 
 }
 
 <button @onclick="AddPlayers">+</button>
 
-@foreach(var name in Names)
+@foreach (var name in Names)
 {
     <p>@name</p>
 }
 
 @if (Names.Count == CurrentCount)
 {
-    <GoForwardButton Url="Game"/>
+    <button @onclick="AddActivePlayers"></button>
 }
 
 <GoBackButton Url="selectPlayers" />
@@ -39,18 +34,26 @@
     [Parameter]
     public int CurrentCount { get; set; }
 
+    public bool IsVisible = false; 
+
     public string InputValue { get; set; }
 
     public List<string> Names { get; set; } = new List<string>();
 
-    public void AddPlayers()
+    private void AddPlayers()
     {
-        if (Names.Count<CurrentCount)
+        if (Names.Count<=CurrentCount)
         {
             string newName = InputValue;
             Names.Add(newName);
             InputValue = "";
         }
-      
+
+    }
+
+    public void AddActivePlayers()
+    {
+        PlayerManager.AddActivePlayers(Names);
+        navigationManager.NavigateTo("/Game");
     }
 }
