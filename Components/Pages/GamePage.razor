@@ -2,35 +2,60 @@
 @using EnDejtTillApplication.Managers;
 @using EnDejtTillApplication.Models;
 
-@foreach(Card card in GameManager.ActiveDeck)
+<h2>@($"{ActivePlayer.Name}s tur")</h2>
 
-
-
-
-<h3>Deltagare</h3>
-
-
-
-
-
-@foreach (var player in PlayerManager.Players)
+@if (ActivePlayer.Hand.Count > 0)
 {
-    <label>@player.Name</label><br />
+    <p>@ActivePlayer.Name är på dejt med någon som </p>
+    foreach(Card card in ActivePlayer.Hand)
+    {
+        
 
+        <p> @card.Question</p>
+        @if(lastQuestionCounter< ActivePlayer.Hand.Count)
+        {
+            <p>och</p>
+        }
+
+        lastQuestionCounter++;
+    }
+
+    <p>På den @dateNumber dejten framkommer det att @currentQuestion</p>
 }
-<label>Deck name:@deckName</label>
+else
+{
+<p>@ActivePlayer.Name är på sin första dejt och träffar en person som är helt perfekt. Hen är snygg, rolig och delar din humor. Men under dejten så framkommer det att @currentQuestion</p>
+}
 
+  
+<button @onclick="SaveCardOnPlayer">En dejt till</button>
+<button @onclick="DeletePlayerHand">Nej fyfan </button>
 
 
 @code {
+    private string dateNumber;
+    private int dateCounter;
+    private int lastQuestionCounter = 0;
+    private int ActivePlayerIndex = 0;
+    private int ActiveCardIndex = 0;
+    private bool IsStarterDeck;
+    private Player ActivePlayer = new();
     private List<Player> players = new();
+    private StarterDeck ActiveStarterDeck = new();
+    private PartyDeck ActivePartyDeck = new();
     private string deckName;
+    private string currentQuestion;
+    private Card ActiveCard; 
 
     protected override  void OnInitialized()
     {
-        ConvertActiveDeck();
 
         players = PlayerManager.Players;
+
+        ConvertActiveDeck();
+        InitializeActiveCard();
+        InitializeActivePlayer();
+
 
         Game newGame = new()
             {
@@ -39,25 +64,109 @@
                 CurrentPlayerIndex = 1
             };
 
-      
+
 
     }
 
-   
+
     public void ConvertActiveDeck()
     {
         if(GameManager.ActiveDeck.GetType() ==typeof(StarterDeck))
         {
             StarterDeck starterDeck = (StarterDeck)GameManager.ActiveDeck;
             deckName = starterDeck.Name;
+            ActiveStarterDeck = starterDeck;
+            IsStarterDeck = true; 
         }
         else if (GameManager.ActiveDeck.GetType() == typeof(PartyDeck))
         {
             PartyDeck partyDeck = (PartyDeck)GameManager.ActiveDeck;
             deckName = partyDeck.Name;
+            ActivePartyDeck = partyDeck;
         }
 
     }
+
+    private void DeletePlayerHand()
+    {
+        ActivePlayer.Hand.Clear();
+        SwitchPlayer();
+    }
+
+    private void SaveCardOnPlayer()
+    {
+        ActivePlayer.Hand.Add(ActiveCard);
+        SwitchPlayer();
+    }
+
+
+    private void SwitchPlayer()
+    {
+        if (ActivePlayerIndex >= players.Count-1)
+        {
+            ActivePlayerIndex = 0;
+        }
+        else
+        {
+            ActivePlayerIndex++;
+        }
+
+        if (ActiveCardIndex >= 5)
+        {
+            ActiveCardIndex = 0;
+        }
+        else
+        {
+            ActiveCardIndex++;
+        }
+
+
+        InitializeActiveCard();
+        InitializeActivePlayer();
+        lastQuestionCounter = 0;
+       
+        CalculateActivePlayerDate();
+        StateHasChanged();
+
+    }
+
+
+    private void InitializeActivePlayer()
+    {
+        ActivePlayer = players[ActivePlayerIndex];
+    }
+
+    private void InitializeActiveCard()
+    {
+        ConvertActiveDeck();
+
+
+        if (IsStarterDeck)
+        {
+            ActiveCard = ActiveStarterDeck.Cards[ActiveCardIndex];
+            currentQuestion = ActiveCard.Question;
+        }
+        else
+        {
+            ActiveCard = ActivePartyDeck.Cards[ActiveCardIndex];
+            currentQuestion = ActiveCard.Question;
+        }
+    }
+
+
+    private void CalculateActivePlayerDate()
+    {
+        if(ActivePlayer.Hand.Count == 1)
+        {
+            dateNumber = "andra";
+        }
+
+        if (ActivePlayer.Hand.Count == 2)
+        {
+            dateNumber = "tredje";
+        }
+    }
+
 
     
 

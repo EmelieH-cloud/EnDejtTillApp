@@ -2,7 +2,7 @@
 {
     public class Card
     {
-        public string Text { get; set; }
+        public string Question { get; set; }
         public bool FirstQuestion { get; set; }
 
 
