@@ -3,48 +3,111 @@
     public class Deck
     {
         public List<Card> Cards { get; set; }
+        public Deck()
+        {
+            Cards = new List<Card>();
+        }
 
     }
 
     public class PartyDeck : Deck
     {
         public string Name { get; set; } = "Party Deck";
-        public static List<Card> Cards { get; set; } =
-        new List<Card>
+
+        public PartyDeck()
         {
-            new Card
+            Cards.AddRange(new List<Card>
             {
-                Text = "Hen har aldrig hört talas om Rysslands invasion av Ukraina"
+                new Card
+            {
+                Question = "Hen har aldrig hört talas om Rysslands invasion av Ukraina"
             },
               new Card
             {
-                Text = "Hens största dröm är att jobba som clown"
+                Question = "Hens största dröm är att jobba som clown"
             },
                 new Card
             {
-                Text = "Hen har tidigare varit med i ett kriminellt gäng"
+                Question = "Hen har tidigare varit med i ett kriminellt gäng"
+
             }
-        };
+            });
+
+        }
     }
+            
+
+
+        
+    
 
     public class StarterDeck : Deck
     {
         public string Name { get; set; } = "Starter Deck";
-        public static List<Card> Cards { get; set; } =
-        new List<Card>
+
+
+        public StarterDeck()
         {
-            new Card
+            Cards.AddRange(new List<Card>
             {
-                Text = "Hen har inget hår på huvudet"
+                new Card
+            {
+                Question = "Hen har aldrig hört talas om Rysslands invasion av Ukraina"
             },
               new Card
             {
-                Text = "Hen tror inte på växthuseffekten"
+                Question = "Hens största dröm är att jobba som clown"
             },
                 new Card
             {
-                Text = "Hen är tjugo kilo tyngre än vad hen var på bilden."
+                Question = "Hen har tidigare varit med i ett kriminellt gäng"
+
+            },
+                 
+                new Card
+            {
+                Question = "Hen har aldrig hört talas om Rysslands invasion av Ukraina"
+            },
+              new Card
+            {
+                Question = "Hens största dröm är att jobba som clown"
+            },
+                new Card
+            {
+                Question = "Hen har tidigare varit med i ett kriminellt gäng"
+
+            },
+                 
+                new Card
+            {
+                Question = "Hen har aldrig hört talas om Rysslands invasion av Ukraina"
+            },
+              new Card
+            {
+                Question = "Hens största dröm är att jobba som clown"
+            },
+                new Card
+            {
+                Question = "Hen har tidigare varit med i ett kriminellt gäng"
+
             }
-        };
+            });
+        }
+        //public static List<Card> Cards { get; set; } =
+        //new List<Card>
+        //{
+        //    new Card
+        //    {
+        //        Question = "Hen har inget hår på huvudet"
+        //    },
+        //      new Card
+        //    {
+        //        Question= "Hen tror inte på växthuseffekten"
+        //    },
+        //        new Card
+        //    {
+        //        Question= "Hen är tjugo kilo tyngre än vad hen var på bilden."
+        //    }
+        //};
     }
 }
