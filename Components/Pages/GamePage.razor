@@ -1,0 +1,66 @@
+﻿@page "/GamePage"
+@using EnDejtTillApplication.Managers;
+@using EnDejtTillApplication.Models;
+
+@foreach(Card card in GameManager.ActiveDeck)
+
+
+
+
+<h3>Deltagare</h3>
+
+
+
+
+
+@foreach (var player in PlayerManager.Players)
+{
+    <label>@player.Name</label><br />
+
+}
+<label>Deck name:@deckName</label>
+
+
+
+@code {
+    private List<Player> players = new();
+    private string deckName;
+
+    protected override  void OnInitialized()
+    {
+        ConvertActiveDeck();
+
+        players = PlayerManager.Players;
+
+        Game newGame = new()
+            {
+                Deck = GameManager.ActiveDeck,
+                Players = players,
+                CurrentPlayerIndex = 1
+            };
+
+      
+
+    }
+
+   
+    public void ConvertActiveDeck()
+    {
+        if(GameManager.ActiveDeck.GetType() ==typeof(StarterDeck))
+        {
+            StarterDeck starterDeck = (StarterDeck)GameManager.ActiveDeck;
+            deckName = starterDeck.Name;
+        }
+        else if (GameManager.ActiveDeck.GetType() == typeof(PartyDeck))
+        {
+            PartyDeck partyDeck = (PartyDeck)GameManager.ActiveDeck;
+            deckName = partyDeck.Name;
+        }
+
+    }
+
+    
+
+
+
+}

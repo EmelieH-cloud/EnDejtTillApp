@@ -8,6 +8,7 @@
 
     public class PartyDeck : Deck
     {
+        public string Name { get; set; } = "Party Deck";
         public static List<Card> Cards { get; set; } =
         new List<Card>
         {
@@ -28,6 +29,7 @@
 
     public class StarterDeck : Deck
     {
+        public string Name { get; set; } = "Starter Deck";
         public static List<Card> Cards { get; set; } =
         new List<Card>
         {
