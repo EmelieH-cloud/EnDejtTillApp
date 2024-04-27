@@ -1,4 +1,6 @@
 ﻿@using EnDejtTillApplication.Components.ReusableComponents;
+@using EnDejtTillApplication.Managers
+@inject NavigationManager navigationManager
 @page "/selectDeck"
 
 
@@ -12,13 +14,26 @@
 <h3>Välj tema</h3>
 
 <div>
-<button><a href="/selectPlayers">Deck 1</a></button> <br />
-<button><a href="/selectPlayers">Deck 2</a></button> <br />
-<button><a href="/selectPlayers">Deck 3</a></button>
+<button @onclick="AddStarterDeck"><a href="/selectPlayers">Starter Deck</a></button> <br />
+<button @onclick="AddPartyDeck"><a href="/selectPlayers">Part Deck</a></button> <br />
+
 </div>
 
 <GoBackButton Url=""/>
 
 @code {
+
+    public void AddStarterDeck()
+    {
+        GameManager.AddActiveDeck("starterDeck");
+        navigationManager.NavigateTo("/selectPlayers");
+    }
+
+    public void AddPartyDeck()
+    {
+        GameManager.AddActiveDeck("partyDeck");
+        navigationManager.NavigateTo("/selectPlayers");
+    }
+
 
 }
