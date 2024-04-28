@@ -35,11 +35,11 @@
 
         }
     }
-            
 
 
-        
-    
+
+
+
 
     public class StarterDeck : Deck
     {
@@ -63,7 +63,7 @@
                 Question = "Hen har tidigare varit med i ett kriminellt gäng"
 
             },
-                 
+
                 new Card
             {
                 Question = "Hen har aldrig hört talas om Rysslands invasion av Ukraina"
@@ -77,7 +77,7 @@
                 Question = "Hen har tidigare varit med i ett kriminellt gäng"
 
             },
-                 
+
                 new Card
             {
                 Question = "Hen har aldrig hört talas om Rysslands invasion av Ukraina"
@@ -86,28 +86,17 @@
             {
                 Question = "Hens största dröm är att jobba som clown"
             },
+                 new Card
+            {
+                Question = "Hen tror inte på växthuseffekten"
+            },
                 new Card
             {
-                Question = "Hen har tidigare varit med i ett kriminellt gäng"
+                Question = "Hen har inget hår på huvudet"
 
             }
             });
         }
-        //public static List<Card> Cards { get; set; } =
-        //new List<Card>
-        //{
-        //    new Card
-        //    {
-        //        Question = "Hen har inget hår på huvudet"
-        //    },
-        //      new Card
-        //    {
-        //        Question= "Hen tror inte på växthuseffekten"
-        //    },
-        //        new Card
-        //    {
-        //        Question= "Hen är tjugo kilo tyngre än vad hen var på bilden."
-        //    }
-        //};
+
     }
 }
