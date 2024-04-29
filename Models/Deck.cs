@@ -7,7 +7,6 @@
         {
             Cards = new List<Card>();
         }
-
     }
 
     public class PartyDeck : Deck

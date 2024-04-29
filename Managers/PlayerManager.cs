@@ -6,6 +6,23 @@ namespace EnDejtTillApplication.Managers
     {
         public static List<Player> Players { get; set; } = new();
 
+
+
+
+        private static bool CheckMarriageStatus(int index)
+        {
+            Player PotentiallyMarriedPlayer = Players[index];
+            if (PotentiallyMarriedPlayer.IsMarried)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
+
         public static void AddActivePlayers(List<string> players)
         {
             foreach (string player in players)

@@ -1,19 +1,43 @@
 ﻿using EnDejtTillApplication.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace EnDejtTillApplication.Managers
 {
-   public static class GameManager
+    public static class GameManager
     {
         public static Deck ActiveDeck { get; set; } = new();
 
+
+        public static StarterDeck? ConvertDeckToStarterDeck(Deck deck)
+        {
+            if (deck.GetType() == typeof(StarterDeck))
+            {
+                StarterDeck starterDeck = (StarterDeck)deck;
+                return starterDeck;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+        public static PartyDeck? ConvertDeckToPartyDeck(Deck deck)
+        {
+            if (deck.GetType() == typeof(PartyDeck))
+            {
+                PartyDeck partyDeck = (PartyDeck)deck;
+                return partyDeck;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
         public static void AddActiveDeck(string deckName)
         {
-            if(deckName == "starterDeck")
+            if (deckName == "starterDeck")
             {
                 StarterDeck starterDeck = new();
                 ActiveDeck = starterDeck;
